@@ -1,2 +1,10 @@
-/dist/
-/nbproject/
+# Ignore NetBeans build artifacts
+build/
+dist/
+
+# Ignore NetBeans private configuration
+nbproject/private/
+
+# Keep essential project config files
+!nbproject/project.properties
+!nbproject/project.xml

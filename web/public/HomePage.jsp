@@ -2,19 +2,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page import="java.util.List" %>
-<%@ page import="Model.Product" %>
+<%--<%@ page import="entity.codebaseOld.Product" %>--%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Laptop Shop</title>
+        <title>Laptop Shop - Home Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
         <link rel="icon" href="${pageContext.request.contextPath}/asset/Image/Favicon/icon2.gif" type="image/gif">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/CSS/header.css"/>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/CSS/footer.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/CSS/header.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/CSS/homePage.css"/>
         <style>
             .toggle-sidebar-btn {
                 display: none;
@@ -240,24 +242,11 @@
         <div class="hero">
             <div class="swiper">
                 <div class="swiper-wrapper">
-                    <!-- Temporarily hidden model data -->
-                    <!-- <c:forEach items="${requestScope.listS}" var="s">
+                    <c:forEach items="${requestScope.listS}" var="s">
                         <div class="swiper-slide">
                             <a href="${s.backLink}" style="display: block; width: 100%; height: 100%;"><img src="${s.link}"></a>
                         </div>
-                    </c:forEach> -->
-                    
-                    <!-- Placeholder slides -->
-                    <div class="swiper-slide">
-                        <div style="background-color: #ccc; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #666; font-size: 24px;">
-                            Slider Image 1
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div style="background-color: #ddd; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #666; font-size: 24px;">
-                            Slider Image 2
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
                 <div class="swiper-pagination"></div>
                 <div class="swiper-button-next"></div>
@@ -285,20 +274,23 @@
             </div>
 
             <div class="pro row justify-content-center">
-                <!-- Temporarily hidden model data -->
-                <!-- <c:if test="${not empty latest}">
+                <c:if test="${not empty latest}">
                     <c:forEach items="${latest}" var="l">
+                        <!-- Reduce the column size for smaller cards -->
                         <div class="col-12 col-md-4 col-lg-3 mb-3 product-content">
                             <a href="productdetail?productId=${l.productId}">
+                                <!-- Add smaller padding, font sizes, and image size -->
                                 <div class="card h-100" style="padding: 10px; box-shadow: 0 0 20px #999999;">
                                     <img class="card-img-top" src="${l.productThumb}" alt="Product Image" style="height: 150px; object-fit: cover;">
                                     <div class="card-body d-flex flex-column">
+                                        <!-- Smaller text size for product name -->
                                         <h3 class="text-center card-text mb-2" style="font-size: 1.1rem;">${l.productName}</h3>
+                                        <!-- Smaller description text size -->
                                         <p class="card-text text-muted text-center" style="font-size: 1.3rem;"><fmt:formatNumber value="${l.productPrice}" pattern="###,###,###VND" /></p>
                                         <div class="tag-section text-center">
                                             <div class="main-badge">
                                                 <c:forEach items="${l.tagList}" var="tag">
-                                                    <span class="badge" style="background-color: #e74c3c;">${tag.name}</span>
+                                                    <span class="badge" style="background-color: ${tag.colorCode};">${tag.name}</span>
                                                 </c:forEach>
                                             </div>
                                         </div>
@@ -315,58 +307,13 @@
                             </a>
                         </div>
                     </c:forEach>
-                </c:if> -->
+                </c:if>
 
-                <!-- Placeholder products -->
-                <div class="col-12 col-md-4 col-lg-3 mb-3 product-content">
-                    <div class="card h-100" style="padding: 10px; box-shadow: 0 0 20px #999999;">
-                        <div class="card-img-top" style="height: 150px; background-color: #ccc; display: flex; align-items: center; justify-content: center; color: #666;">
-                            Product Image
-                        </div>
-                        <div class="card-body d-flex flex-column">
-                            <h3 class="text-center card-text mb-2" style="font-size: 1.1rem;">Sample Product 1</h3>
-                            <p class="card-text text-muted text-center" style="font-size: 1.3rem;">1,500,000 VND</p>
-                            <div class="tag-section text-center">
-                                <div class="main-badge">
-                                    <span class="badge" style="background-color: #e74c3c;">New</span>
-                                </div>
-                            </div>
-                            <div class="feedback-section">
-                                <div class="mt-auto">
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"> 4.5 ( 25 )</i>
-                                </div>
-                                <div class="sold">
-                                    <p>Sold: 150</p>
-                                </div>
-                            </div>
-                        </div>
+                <c:if test="${empty listP}">
+                    <div class="col-12">
+                        <p class="text-center">There are no products available at the moment.</p>
                     </div>
-                </div>
-                
-                <div class="col-12 col-md-4 col-lg-3 mb-3 product-content">
-                    <div class="card h-100" style="padding: 10px; box-shadow: 0 0 20px #999999;">
-                        <div class="card-img-top" style="height: 150px; background-color: #ddd; display: flex; align-items: center; justify-content: center; color: #666;">
-                            Product Image
-                        </div>
-                        <div class="card-body d-flex flex-column">
-                            <h3 class="text-center card-text mb-2" style="font-size: 1.1rem;">Sample Product 2</h3>
-                            <p class="card-text text-muted text-center" style="font-size: 1.3rem;">2,300,000 VND</p>
-                            <div class="tag-section text-center">
-                                <div class="main-badge">
-                                    <span class="badge" style="background-color: #e74c3c;">Hot</span>
-                                </div>
-                            </div>
-                            <div class="feedback-section">
-                                <div class="mt-auto">
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"> 4.8 ( 42 )</i>
-                                </div>
-                                <div class="sold">
-                                    <p>Sold: 89</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </c:if>
             </div>
         </div>
         <div class="container">
@@ -387,20 +334,23 @@
                 </div>
             </div>
             <div class="pro row justify-content-center">
-                <!-- Temporarily hidden model data -->
-                <!-- <c:if test="${not empty listP}">
+                <c:if test="${not empty listP}">
                     <c:forEach items="${listP}" var="o">
+                        <!-- Reduce the column size for smaller cards -->
                         <div class="col-12 col-md-4 col-lg-3 mb-3 product-content">
                             <a href="productdetail?productId=${o.productId}">
+                                <!-- Add smaller padding, font sizes, and image size -->
                                 <div class="card h-100" style="padding: 10px; box-shadow: 0 0 20px #999999;">
                                     <img class="card-img-top" src="${o.productThumb}" alt="Product Image" style="height: 150px; object-fit: cover;">
                                     <div class="card-body d-flex flex-column">
+                                        <!-- Smaller text size for product name -->
                                         <h3 class="card-text text-center mb-2" style="font-size: 1.1rem;">${o.productName}</h3>
+                                        <!-- Smaller description text size -->
                                         <p class="card-text text-muted text-center" style="font-size: 1.3rem;"><fmt:formatNumber value="${o.productPrice}" pattern="###,###,###VND" /></p>
                                         <div class="tag-section text-center">
                                             <div class="main-badge">
                                                 <c:forEach items="${o.tagList}" var="tag">
-                                                    <span class="badge" style="background-color: #c0392b;">${tag.name}</span>
+                                                    <span class="badge" style="background-color: ${tag.colorCode};">${tag.name}</span>
                                                 </c:forEach>
                                             </div>
                                         </div>
@@ -417,83 +367,13 @@
                             </a>
                         </div>
                     </c:forEach>
-                </c:if> -->
+                </c:if>
 
-                <!-- Placeholder feature products -->
-                <div class="col-12 col-md-4 col-lg-3 mb-3 product-content">
-                    <div class="card h-100" style="padding: 10px; box-shadow: 0 0 20px #999999;">
-                        <div class="card-img-top" style="height: 150px; background-color: #eee; display: flex; align-items: center; justify-content: center; color: #666;">
-                            Product Image
-                        </div>
-                        <div class="card-body d-flex flex-column">
-                            <h3 class="card-text text-center mb-2" style="font-size: 1.1rem;">Feature Product 1</h3>
-                            <p class="card-text text-muted text-center" style="font-size: 1.3rem;">3,200,000 VND</p>
-                            <div class="tag-section text-center">
-                                <div class="main-badge">
-                                    <span class="badge" style="background-color: #c0392b;">Featured</span>
-                                </div>
-                            </div>
-                            <div class="feedback-section">
-                                <div class="mt-auto">
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"> 4.9 ( 67 )</i>
-                                </div>
-                                <div class="sold">
-                                    <p>Sold: 234</p>
-                                </div>
-                            </div>
-                        </div>
+                <c:if test="${empty listP}">
+                    <div class="col-12">
+                        <p class="text-center">There are no products available at the moment.</p>
                     </div>
-                </div>
-                
-                <div class="col-12 col-md-4 col-lg-3 mb-3 product-content">
-                    <div class="card h-100" style="padding: 10px; box-shadow: 0 0 20px #999999;">
-                        <div class="card-img-top" style="height: 150px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #666;">
-                            Product Image
-                        </div>
-                        <div class="card-body d-flex flex-column">
-                            <h3 class="card-text text-center mb-2" style="font-size: 1.1rem;">Feature Product 2</h3>
-                            <p class="card-text text-muted text-center" style="font-size: 1.3rem;">4,500,000 VND</p>
-                            <div class="tag-section text-center">
-                                <div class="main-badge">
-                                    <span class="badge" style="background-color: #c0392b;">Premium</span>
-                                </div>
-                            </div>
-                            <div class="feedback-section">
-                                <div class="mt-auto">
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"> 4.7 ( 38 )</i>
-                                </div>
-                                <div class="sold">
-                                    <p>Sold: 76</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-12 col-md-4 col-lg-3 mb-3 product-content">
-                    <div class="card h-100" style="padding: 10px; box-shadow: 0 0 20px #999999;">
-                        <div class="card-img-top" style="height: 150px; background-color: #e0e0e0; display: flex; align-items: center; justify-content: center; color: #666;">
-                            Product Image
-                        </div>
-                        <div class="card-body d-flex flex-column">
-                            <h3 class="card-text text-center mb-2" style="font-size: 1.1rem;">Feature Product 3</h3>
-                            <p class="card-text text-muted text-center" style="font-size: 1.3rem;">1,800,000 VND</p>
-                            <div class="tag-section text-center">
-                                <div class="main-badge">
-                                    <span class="badge" style="background-color: #c0392b;">Popular</span>
-                                </div>
-                            </div>
-                            <div class="feedback-section">
-                                <div class="mt-auto">
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"> 4.6 ( 53 )</i>
-                                </div>
-                                <div class="sold">
-                                    <p>Sold: 187</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </c:if>
             </div>
         </div>
 
@@ -502,6 +382,7 @@
         <jsp:include page="../base-component/footer.jsp" />
 
         <!-- Include the new JavaScript file -->
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/JS/HomePage.js"></script>
     </body>
 </html>
